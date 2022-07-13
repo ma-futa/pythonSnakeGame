@@ -14,13 +14,25 @@ class Snake:
         self.head = self.snake_body[0]
 
     def create_snake(self):
-        for index in range(3):
-            segment = Turtle(shape='square')
-            segment.penup()
-            segment.color('white')
-            offset = -20.0 * index
-            segment.goto(x=offset, y=0)
-            self.snake_body.append(segment)
+        for index in range(7):
+            self.add_segment(index)
+
+    def add_segment(self,index):
+        segment = Turtle(shape='square')
+        segment.penup()
+        segment.color('white')
+        offset = -20.0 * index
+        segment.goto(x=offset, y=0)
+        self.snake_body.append(segment)
+
+    def extend(self):
+
+        segment = Turtle(shape='square')
+        segment.penup()
+        segment.color('white')
+        # offset = -20.0 * index
+        segment.goto(self.snake_body[-1].position())
+        self.snake_body.append(segment)
 
     def up(self):
         if self.head.heading() != DOWN:
