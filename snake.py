@@ -15,24 +15,19 @@ class Snake:
 
     def create_snake(self):
         for index in range(7):
-            self.add_segment(index)
+            offset = (-20.0 * index, 0)
+            self.add_segment(offset)
 
-    def add_segment(self,index):
+    def add_segment(self, offset):
         segment = Turtle(shape='square')
         segment.penup()
         segment.color('white')
-        offset = -20.0 * index
-        segment.goto(x=offset, y=0)
+
+        segment.goto(offset)
         self.snake_body.append(segment)
 
     def extend(self):
-
-        segment = Turtle(shape='square')
-        segment.penup()
-        segment.color('white')
-        # offset = -20.0 * index
-        segment.goto(self.snake_body[-1].position())
-        self.snake_body.append(segment)
+        self.add_segment(self.snake_body[-1].position())
 
     def up(self):
         if self.head.heading() != DOWN:
@@ -49,8 +44,6 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
-
-
 
     def move(self):
         for seg_num in range(len(self.snake_body) - 1, 0, -1):
